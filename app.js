@@ -1,6 +1,11 @@
 const currencyOneEl = document.querySelector('[data-js="currency-one"]')
-const currencytwoEl = document.querySelector('[data-js="currency-two"]')
+const currencyTwoEl = document.querySelector('[data-js="currency-two"]')
+
+
 
 currencyOneEl.innerHTML = `<option>oi</option>`
 
-console.log(currencyOneEl, currencytwoEl)
+currencyOneEl.innerHTML = option
+currencyTwoEl.innerHTML = option
+
+console.log(currencyOneEl, currencyTwoEl)
