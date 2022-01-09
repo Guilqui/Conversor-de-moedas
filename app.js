@@ -4,6 +4,9 @@ const currenciesEl = document.querySelector('[data-js="currencies-container"]')
 const convertedValueEl = document.querySelector('[data-js="converted-value"]')
 const valuePrecisionEl = document.querySelector('[data-js="conversion-precision"]')
 const url = 'https://v6.exchangerate-api.com/v6/362ee49ee3ac59a944f0a5ab/latest/USD'
+const timerCurrencyOneEl = document.querySelector('[data-js="currency-one-times"]')
+
+let internalExchangeRate = {}
 
 console.log(url)
 
@@ -55,6 +58,8 @@ const fetchExchangeRate = async () => {
 const init = async () => {
     const exchangeRateData = await fetchExchangeRate()
 
+    internalExchangeRate = { ...exchangeRateData}
+
     console.log(exchangeRateData)
 
     const getOptions = selectedCurrency => Object.keys(exchangeRateData.conversion_rates)
@@ -67,5 +72,9 @@ const init = async () => {
     convertedValueEl.textContent = exchangeRateData.conversion_rates.BRL.toFixed(2)
     valuePrecisionEl.textContent = `1 USD = ${exchangeRateData.conversion_rates.BRL} BRL`
 }
+
+timerCurrencyOneEl.addEventListener('input', e => {
+    convertedValueEl.textContent = (e.target.value * internalExchangeRate.conversion_rates[currencyTwoEl.value]).toFixed(2)
+})
 
  init()
